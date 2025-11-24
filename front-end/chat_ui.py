@@ -52,7 +52,7 @@ if prompt := st.chat_input("What is up?"):
         response_data = make_api_call(prompt)  # Get API response
         dialog_state = response_data.get('dialog_state')
         if not dialog_state:
-            dialog_state = 'primary_assitant'
+            dialog_state = 'primary_assistant'
         answer = response_data.get("answer", "No response from API")
         st.markdown(f'**:red[{agent_dict[dialog_state]}]**')
         st.markdown(answer)  # Display API response
