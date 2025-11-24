@@ -1,4 +1,4 @@
-from pydantic import constr, BaseModel, Field, validator
+from pydantic import constr, BaseModel, Field, validator,field_validator
 import re
 
 
@@ -28,13 +28,13 @@ class DateModel(BaseModel):
 
     
 class IdentificationNumberModel(BaseModel):
-    """
-    The way the ID should be structured and formatted
-    """
-    id: int = Field(..., description="identification number without dots", pattern=r'^\d{7,8}$')
+    id: int = Field(..., description="identification number without dots")
 
-    @validator("id")
-    def check_format_id(cls, v):
-        if not re.match(r'^\d{7,8}$',str(v)):
-            raise ValueError("The ID number should be a number of 7 or 8 numbers")
+    @field_validator("id", mode="before")
+    def convert_and_check(cls, v):
+        # Convert float string like 1000046.0 → 1000046
+        v = int(float(v))
+
+        if not re.match(r'^\d{7,8}$', str(v)):
+            raise ValueError("The ID number should be 7 or 8 digits")
         return v
