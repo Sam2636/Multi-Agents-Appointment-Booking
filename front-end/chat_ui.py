@@ -3,10 +3,11 @@ import httpx
 import uuid
 
 agent_dict = {
-    'get_info':'information_agent',
-    'appointment_info':'appointment_agent',
-    'primary_assitant':'supervisor_agent'
+    'get_info': 'information_agent',
+    'appointment_info': 'appointment_agent',
+    'primary_assistant': 'supervisor_agent'
 }
+
 
 def generate_uuid() -> str:
     return str(uuid.uuid4())

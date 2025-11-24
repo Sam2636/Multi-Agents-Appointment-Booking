@@ -1,5 +1,5 @@
 from models.tools import DateModel, DateTimeModel, IdentificationNumberModel
-from langchain_core.pydantic_v1 import constr, BaseModel, Field, validator
+from pydantic import constr, BaseModel, Field, validator
 from typing import Optional
 
 # Primary Assistant

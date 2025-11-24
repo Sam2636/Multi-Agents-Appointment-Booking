@@ -7,6 +7,7 @@ from utils.helper import create_entry_node
 from langchain_openai import AzureChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
 from agents.agents import get_runnable
 from models.agents import CompleteOrEscalate
 from utils.prompts import info_agent_prompt,booking_agent_prompt,primary_agent_prompt
@@ -35,19 +36,14 @@ memory = SqliteSaver(conn)
 
 Azure_Creds = get_settings()
 
-os.environ["LANGCHAIN_TRACING_V2"] = 'true'
-os.environ["LANGCHAIN_ENDPOINT"] = Azure_Creds.LANGCHAIN_ENDPOINT
-os.environ["LANGCHAIN_API_KEY"] = Azure_Creds.LANGCHAIN_API_KEY
-os.environ["LANGCHAIN_PROJECT"] = Azure_Creds.LANGCHAIN_PROJECT
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
 
-
-llm = AzureChatOpenAI(temperature=0,
-                           api_key=Azure_Creds.AZURE_OPENAI_API_KEY,
-                           azure_endpoint=Azure_Creds.AZURE_OPENAI_ENDPOINT,
-                           openai_api_version=Azure_Creds.AZURE_OPENAI_VERSION,
-                           azure_deployment=Azure_Creds.AZURE_GPT4O_MODEL
-                           )
-
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0.7,
+    api_key=api_key,
+)
 
 info_tools = [check_availability_by_specialization,check_availability_by_doctor]
 info_runnable = get_runnable(
