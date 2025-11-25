@@ -151,7 +151,7 @@ date_slot,specialization,doctor_name,is_available,patient_to_attend
 14-08-2024 15.30,general_dentist,john doe,True,
 14-08-2024 16.00,general_dentist,john doe,True,
 14-08-2024 16.30,general_dentist,john doe,True,
-15-08-2024 8.00,general_dentist,john doe,True,
+15-08-2024 8.00,general_dentist,john doe,False,1122566.0
 15-08-2024 8.30,general_dentist,john doe,True,
 15-08-2024 9.00,general_dentist,john doe,True,
 15-08-2024 9.30,general_dentist,john doe,True,
